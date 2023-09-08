@@ -58,6 +58,7 @@ import { mapState , mapActions } from "vuex";
                 {text:'Home', icon:'mdi-home', to:'home'},
                 {text:'Hello', icon:'mdi-hand-wave', to:'hello'},
                 {text: 'Test', icon: 'mdi-account', to : 'test'},
+                {text: 'Patient Registration', icon: 'mdi-account', to : 'patient_registration'},
                 // {text: 'Registration', icon: 'mdi-account', to : 'registration'},
             ]
         }),

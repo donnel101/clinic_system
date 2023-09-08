@@ -2,19 +2,27 @@ import axios from 'axios';
 import Vue from 'vue';
 import Vuex from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
+import province from './province.json'
+import municipality from './municipality.json'
+import barangay from './barangay.json'
 
 Vue.use(Vuex)
 const persistedData = new createPersistedState({
-    key:'laravel_breeze',
+    key:'clinic_system_vuex',
     storage: localStorage,
     reducer : state => ({
-        loggedInUser : state.loggedInUser
+        loggedInUser : state.loggedInUser,
+        systemData : state.systemData,
     })
 })
 
 export default new Vuex.Store({
     state:{
         loggedInUser : null,
+        systemData:null,
+        province:province,
+        municipality:municipality,
+        barangay:barangay,
         allUsers : [],
         rules: {
             required: [(v) => !!v || "Field is required"],
@@ -72,7 +80,12 @@ export default new Vuex.Store({
                     return "Field is required";
                 },
             ],
+            contactNo: [
+                (v) =>
+                    !v || /[0-9]{11}/.test(v) || "Must be a 11 number",
+            ],
         },
+        provinceMaster:[],
     },
 
     actions:{
@@ -98,7 +111,31 @@ export default new Vuex.Store({
             .then( response => {
                 commit('getUsers', response.data);
             } )
-        }
+        },
+        getSystemData({commit}){
+            
+            axios({
+                method : 'get',
+                url : 'get_system_data'
+            })
+            .then(res =>{
+                commit('getSystemData',res.data);
+            }).catch(err =>{
+                console.log(err)
+            });
+        },
+        getProvince({commit}){
+            
+            axios({
+                method : 'get',
+                url : 'get_province'
+            })
+            .then(res =>{
+                commit('getProvince',res.data);
+            }).catch(err =>{
+                console.log(err)
+            });
+        },
     },
 
     mutations:{
@@ -116,6 +153,12 @@ export default new Vuex.Store({
         getUsers(state, data){
             console.log('hehaw',data)
             state.allUsers = data
+        },
+        getSystemData(state,payload){
+            state.systemData = payload
+        },
+        getProvince(state,payload){
+            state.provinceMaster = payload
         }
     },
     getters:{},

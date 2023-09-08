@@ -16,7 +16,7 @@
     </v-app-bar> -->
     <v-app-bar app clipped-left  dark color="#0e6d3a">
         <v-app-bar-nav-icon @click="toggleDrawer(!drawer)"></v-app-bar-nav-icon>
-        <v-toolbar-title>System Name</v-toolbar-title>
+        <v-toolbar-title>{{systemData ? systemData.name : null}}</v-toolbar-title>
         <v-spacer></v-spacer>
         <span class="overline">{{auth_name}}</span>
         <v-tooltip bottom>
@@ -83,7 +83,8 @@ export default {
     computed: {
         ...mapState([
             'loggedInUser',
-            'auth_name'
+            'auth_name',
+            'systemData',
         ])
 
     },

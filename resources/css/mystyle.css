@@ -273,7 +273,7 @@ tbody tr.active-row {
 
 /*----- dialog title ----- */
 .v-dialog .v-card .v-card__title{
-    background: #edce9e !important;
+    background: #00a94f !important;
     color: #ffffff !important;
     padding: 4px 16px !important;
 }

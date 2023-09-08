@@ -19,6 +19,9 @@
     "dependencies": {
         "@mdi/font": "^6.5.95",
         "axios": "0.21.1",
+        "moment": "^2.29.4",
+        "sass": "^1.49.7",
+        "sass-loader": "12.1.0",
         "vue": "^2.6.14",
         "vue-loader": "^15.9.8",
         "vue-router": "^3.5.3",
@@ -26,8 +29,6 @@
         "vuetify": "^2.6.2",
         "vuetify-loader": "^1.7.3",
         "vuex": "^3.6.2",
-        "vuex-persistedstate": "^4.1.0",
-        "sass-loader": "12.1.0",
-        "sass": "^1.49.7"
+        "vuex-persistedstate": "^4.1.0"
     }
 }

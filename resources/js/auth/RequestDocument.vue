@@ -13,7 +13,7 @@
                         </template>
                         <v-card-title class="justify-center py-8">
                             <span class="display-3">
-                                {{systemData ? systemData.name : null}}
+                                System Name
                             </span>
                         </v-card-title>
                         <v-divider></v-divider>
@@ -179,8 +179,7 @@ export default {
     },
     computed: {
         ...mapState([
-            'rules',
-            'systemData',
+            'rules'
         ])
     },
 
@@ -193,6 +192,7 @@ export default {
                 // window.location.reload()
                 console.log('toto');
                 this.$router.push('/')
+                console.log(this.$router)
             // }, 1000);
             
         },

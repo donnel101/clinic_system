@@ -5,7 +5,7 @@ window._ = require('lodash');
  * to our Laravel back-end. This library automatically handles sending the
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
-
+window.moment = require('moment');
 window.axios = require('axios');
 window.base_dir = `${window.location.protocol}//${window.location.host}/clinic_system`
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';

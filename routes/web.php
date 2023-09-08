@@ -4,6 +4,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SpaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Stmt\TryCatch;
+use App\Models\SystemConfiguration;
+use Symfony\Component\HttpFoundation\Request;
+use App\Http\Controllers\SystemConfigurationController;
+use App\Http\Controllers\AddressController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,7 +23,17 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 */
 
 require __DIR__.'/auth.php';
-
+Route::middleware('guest')->group(function () {
+    Route::get('/',function(){
+        return view('auth.login');
+    });
+    Route::get('/request_document',function(){
+        return view('auth.login');
+    });
+    Route::post('/system_insert',[SystemConfigurationController::class, 'system_insert']);
+    Route::get('/get_system_data',[SystemConfigurationController::class, 'get_system_data']);
+    Route::post('/insert_address', [AddressController::class, 'insert_address']);
+});
 
 Route::middleware(['auth'])->group(function() {
     /*  
@@ -32,6 +49,8 @@ Route::middleware(['auth'])->group(function() {
     Route::post('/register_insert', [UserController::class, 'register_insert']);
     Route::post('/register_update', [UserController::class, 'register_update']);
     Route::post('/register_delete', [UserController::class, 'register_delete']);
+
+    Route::get('/get_province', [AddressController::class, 'get_province']);
     
     Route::get('/{any?}', [SpaController::class, 'index'])->where('any', '.*');
 });
