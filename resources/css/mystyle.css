@@ -354,7 +354,7 @@ tbody tr.active-row {
     color: green;
 }
 
-.uppercase-value input{
+.uppercase input{
     text-transform: uppercase;
 }
 

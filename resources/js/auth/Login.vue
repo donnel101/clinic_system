@@ -38,7 +38,7 @@
                                     @focus="$event.target.removeAttribute('readonly');"
                                     outlined
                                     dense
-                                    class="uppercase-value"
+                                    class="uppercase"
                                     :rules="[...rules.required]"
                                 ></v-text-field>
 

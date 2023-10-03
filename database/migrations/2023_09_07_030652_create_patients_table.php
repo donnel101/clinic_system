@@ -27,6 +27,7 @@ class CreatePatientsTable extends Migration
             $table->date('birthday');
             $table->string('birth_place');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

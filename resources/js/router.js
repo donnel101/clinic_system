@@ -5,12 +5,16 @@ Vue.use(VueRouter)
 import Home from './components/Home'
 import Hello from './components/Hello'
 import Test from './components/Test'
-import Registration from './components/pages/Registration.vue'
+import Registration from './components/pages/account_registration/Registration.vue'
 import Login from './auth/Login'
 import LoginOption from './auth/LoginOption'
 import RequestDocument from './auth/RequestDocument'
 
 import PatientRegistrationPage from './components/pages/patient_registration/PatientRegistrationPage.vue'
+import ReligionPage from './components/pages/masters/ReligionPage.vue'
+import DoctorPage from './components/pages/masters/DoctorPage.vue'
+import RoomPage from './components/pages/masters/RoomPage.vue'
+import AdmissionPage from './components/pages/admission/AdmissionPage.vue'
 
 export default new VueRouter({
     mode: 'history',
@@ -61,6 +65,30 @@ export default new VueRouter({
             name: 'patient_registration',
             component : PatientRegistrationPage
         },
+        {
+            path: '/admission',
+            name: 'admission',
+            component : AdmissionPage
+        },
+
+        // Master
+
+        {
+            path: '/religion',
+            name: 'religion',
+            component : ReligionPage
+        },
+        {
+            path: '/doctor',
+            name: 'doctor',
+            component : DoctorPage
+        },
+        {
+            path: '/room',
+            name: 'room',
+            component : RoomPage
+        },
+
 
       
     ],

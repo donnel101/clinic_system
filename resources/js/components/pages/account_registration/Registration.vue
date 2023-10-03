@@ -180,8 +180,8 @@
     </v-container>
 </template>
 <script>
-import ToolbarComponent from '../includes/Toolbar'
-import FloatAction from '../includes/FloatAction.vue'
+import ToolbarComponent from '../../includes/Toolbar'
+import FloatAction from '../../includes/FloatAction.vue'
 import { mapActions, mapState } from 'vuex'
 export default {
     

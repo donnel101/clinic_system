@@ -59,6 +59,10 @@ import { mapState , mapActions } from "vuex";
                 {text:'Hello', icon:'mdi-hand-wave', to:'hello'},
                 {text: 'Test', icon: 'mdi-account', to : 'test'},
                 {text: 'Patient Registration', icon: 'mdi-account', to : 'patient_registration'},
+                {text: 'Religion', icon: 'mdi-church', to : 'religion'},
+                {text: 'Doctor', icon: 'mdi-doctor', to : 'doctor'},
+                {text: 'Room', icon: 'mdi-bed', to : 'room'},
+                {text: 'Admission', icon: 'mdi-hospital-box-outline', to : 'admission'},
                 // {text: 'Registration', icon: 'mdi-account', to : 'registration'},
             ]
         }),

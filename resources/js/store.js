@@ -75,17 +75,37 @@ export default new Vuex.Store({
                 ];
             },
             numberRule: [
-                (v) => {
-                    if (!isNaN(v) && v >= 0 && v <= 99) return true;
-                    return "Field is required";
-                },
+                // (v) => {
+                //     if (!isNaN(v) && v >= 0 && v <= 99) return true;
+                //     return "Field is required";
+                // },
+                (v) => !!v || "Field is required",
+                (v) => (!isNaN(v) && v >= 1 && v <= 99) || "Must be between 1-99",
             ],
             contactNo: [
-                (v) =>
-                    !v || /[0-9]{11}/.test(v) || "Must be a 11 number",
+                (v) => !!v || "Field is required",
+                (v) => !v || /[0-9]{11}/.test(v) || "Must be a 11 number",
             ],
         },
         provinceMaster:[],
+        religionData:[],
+        doctorData:[],
+        selectSex:[
+            {name:'Female',id:1},
+            {name:'Male',id:2}
+        ],
+        selectCivil:[
+            {name:'Single',id:1},
+            {name:'Married',id:2},
+            {name:'Widow',id:3}
+        ],
+        selectRoomType:[
+            {id:1,name:'Private'},
+            {id:2,name:'Ward'}
+        ],
+        patientData:[],
+        roomData:[],
+        caseData:[],
     },
 
     actions:{
@@ -136,6 +156,61 @@ export default new Vuex.Store({
                 console.log(err)
             });
         },
+        getReligion({commit}){
+            axios({
+                method : 'get',
+                url : 'get_religion'
+            })
+            .then(res =>{
+                commit('getReligion',res.data);
+            }).catch(err =>{
+                console.log(err)
+            });
+        },
+        getDoctor({commit}){
+            axios({
+                method : 'get',
+                url : 'get_doctor'
+            })
+            .then(res =>{
+                commit('getDoctor',res.data);
+            }).catch(err =>{
+                console.log(err)
+            });
+        },
+        getPatient({commit}){
+            axios({
+                method : 'get',
+                url : 'get_patient'
+            })
+            .then(res =>{
+                commit('getPatient',res.data);
+            }).catch(err =>{
+                console.log(err)
+            });
+        },
+        getRoom({commit}){
+            axios({
+                method : 'get',
+                url : 'get_room'
+            })
+            .then(res =>{
+                commit('getRoom',res.data);
+            }).catch(err =>{
+                console.log(err)
+            });
+        },
+        getCase({commit}){
+            axios({
+                method : 'get',
+                url : 'get_case'
+            })
+            .then(res =>{
+                commit('getCase',res.data);
+            }).catch(err =>{
+                console.log(err)
+            });
+        },
     },
 
     mutations:{
@@ -159,7 +234,22 @@ export default new Vuex.Store({
         },
         getProvince(state,payload){
             state.provinceMaster = payload
-        }
+        },
+        getReligion(state,payload){
+            state.religionData = payload
+        },
+        getDoctor(state,payload){
+            state.doctorData = payload
+        },
+        getPatient(state,payload){
+            state.patientData = payload
+        },
+        getRoom(state,payload){
+            state.roomData = payload
+        },
+        getCase(state,payload){
+            state.caseData = payload
+        },
     },
     getters:{},
     plugins: [persistedData]
