@@ -207,6 +207,7 @@ export default new Vuex.Store({
             })
             .then(res =>{
                 commit('getCase',res.data);
+                console.log(res.data)
             }).catch(err =>{
                 console.log(err)
             });

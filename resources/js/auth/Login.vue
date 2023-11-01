@@ -60,6 +60,8 @@
                                     :rules="rules.password"
                                 ></v-text-field>
 
+                             <router-link to="/forgot_password"><span @click="forgetPassword()" style="color:blue; text-decoration; cursor:pointer;">forget password?</span></router-link>   
+
                                 <v-divider></v-divider>
 
                                 <v-card-actions :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }">
@@ -188,6 +190,9 @@ export default {
         ...mapActions([
             'login'
         ]),
+        forgetPassword(){
+            console.log("test")
+        },
         patientRequest(){
             // setTimeout(() => {
                 // window.location.reload()

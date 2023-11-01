@@ -15,6 +15,9 @@ import ReligionPage from './components/pages/masters/ReligionPage.vue'
 import DoctorPage from './components/pages/masters/DoctorPage.vue'
 import RoomPage from './components/pages/masters/RoomPage.vue'
 import AdmissionPage from './components/pages/admission/AdmissionPage.vue'
+import PatientMonitoring from './components/pages/patient_monitoring/PatientMonitoringPage.vue'
+import ForgotPassword from './components/pages/forgot_password/ForgotPassword.vue'
+import ChangePassword from './components/pages/forgot_password/changePassword.vue'
 
 export default new VueRouter({
     mode: 'history',
@@ -87,6 +90,21 @@ export default new VueRouter({
             path: '/room',
             name: 'room',
             component : RoomPage
+        },
+        {
+            path: '/patient_monitoring',
+            name: 'patient_monitoring',
+            component : PatientMonitoring
+        },
+        {
+            path: '/forgot_password',
+            name: 'forgot_password',
+            component : ForgotPassword
+        },
+        {
+            path: '/change_password',
+            name: 'change_password',
+            component : ChangePassword
         },
 
 

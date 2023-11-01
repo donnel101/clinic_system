@@ -63,6 +63,7 @@ import { mapState , mapActions } from "vuex";
                 {text: 'Doctor', icon: 'mdi-doctor', to : 'doctor'},
                 {text: 'Room', icon: 'mdi-bed', to : 'room'},
                 {text: 'Admission', icon: 'mdi-hospital-box-outline', to : 'admission'},
+                {text: 'Patient Monitoring', icon: 'mdi-account-injury-outline', to : 'patient_monitoring'},
                 // {text: 'Registration', icon: 'mdi-account', to : 'registration'},
             ]
         }),

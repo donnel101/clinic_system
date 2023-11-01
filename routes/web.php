@@ -15,6 +15,7 @@ use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\AdmissionController;
+use App\Http\Controllers\EmailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,9 +36,14 @@ Route::middleware('guest')->group(function () {
     Route::get('/request_document',function(){
         return view('auth.login');
     });
+    Route::get('/tae',function(){
+        return 'take';
+    });
     Route::post('/system_insert',[SystemConfigurationController::class, 'system_insert']);
     Route::get('/get_system_data',[SystemConfigurationController::class, 'get_system_data']);
     Route::post('/insert_address', [AddressController::class, 'insert_address']);
+
+    Route::post('/verify_account',[UserController::class, 'verifyAccount']);
 });
 
 Route::middleware(['auth'])->group(function() {
@@ -85,4 +91,7 @@ Route::middleware(['auth'])->group(function() {
     Route::post('/patient_delete', [PatientController::class, 'patient_delete']);
     
     Route::get('/{any?}', [SpaController::class, 'index'])->where('any', '.*');
+
+
+
 });
