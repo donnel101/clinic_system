@@ -8,6 +8,7 @@
                     <th v-show="editMode" class="text-left" style="width:20px">ID</th> 
                     <th>Name</th>
                     <th>Username</th>
+                    <th>Email</th>
                 </tr>
             </thead>
             <tbody>
@@ -19,6 +20,7 @@
                     <td v-show="editMode">{{item.id}}</td>
                     <td>{{item.name}}</td>
                     <td>{{item.username}}</td>
+                    <td>{{item.email}}</td>
                 </tr>
             </tbody>
         </v-simple-table>
@@ -73,6 +75,19 @@
                                         persistent-placeholder
                                         outlined
                                         name="password"
+                                    ></v-text-field>
+                                </v-col>
+                                 <v-col cols="12">
+                                    <v-text-field
+                                        label="Email"
+                                        v-model="tempEmail"
+                                        class="required"
+                                        dense
+                                        type="email"
+                                        :rules="rules.required"
+                                        persistent-placeholder
+                                        outlined
+                                        name="email"
                                     ></v-text-field>
                                 </v-col>
                             </v-row>
@@ -236,7 +251,7 @@ export default {
             tempUsername:null,
             tempPassword:null,
             tempIp:null,
-
+            tempEmail:null,
         }
     },
     methods:{

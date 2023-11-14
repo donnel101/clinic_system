@@ -55,6 +55,7 @@ class AdmissionController extends Controller
                 'doctors.name as doctor_name',
                 'rooms.name as room_name',
                 'rooms.room_type',
+                'admissions.created_at AS admission_date',
             )
             ->leftJoin('patients','patients.id','admissions.patient_id')
             ->leftJoin('doctors','doctors.id','admissions.doctor_id')

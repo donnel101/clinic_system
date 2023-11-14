@@ -86,6 +86,48 @@ class UserController extends Controller
         //
     }
 
+    public function change_password(Request $req){
+        // return $req;
+        $min = 100000;
+        $max = 999999;
+        $randomNumber = mt_rand($min, $max);
+        $pin_number = strval($randomNumber);
+        try {
+            $user = User::find($req->id);
+            $user->pin = $pin_number;
+            $user->save();
+            return $pin_number;
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+
+    public function verifyAccount(Request $req){
+        // return $req;
+        $user = User::where('email',$req->email)->first();
+        return $user;
+    }
+
+    public function send_pin_number(Request $req){
+        // return $req;
+        $min = 100000;
+        $max = 999999;
+        $randomNumber = mt_rand($min, $max);
+        $pin_number = strval($randomNumber);
+        try {
+            $user = User::find($req->id);
+            $user->pin = $pin_number;
+            $user->save();
+            return $pin_number;
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+
+
+
     public function get_user(Request $req){
         try {
             $users = User::get();
@@ -103,6 +145,7 @@ class UserController extends Controller
             $user->name = strtoupper($req->name);
             $user->username = strtoupper($req->username);
             $user->password = Hash::make($req->password);
+            $user->email = $req->email;
             $user->save();
             return 'success';
         } catch (\Exception $e) {
