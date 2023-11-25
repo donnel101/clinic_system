@@ -176,4 +176,23 @@ class UserController extends Controller
             return $e->getMessage();
         }
     }
+
+    public function create_admin(){
+        try {
+            $users = User::get();
+            if(count($users) < 1){
+                $user = new User;
+                $user->name = 'ADMIN';
+                $user->username = 'ADMIN';
+                $user->password = Hash::make('admin101');
+                $user->email = 'admin@changeMe.com';
+                $user->save();
+                return 'success';
+            }else{
+                return 'already has admin';
+            }
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
 }

@@ -44,6 +44,7 @@ Route::middleware('guest')->group(function () {
     Route::post('/insert_address', [AddressController::class, 'insert_address']);
 
     Route::post('/verify_account',[UserController::class, 'verifyAccount']);
+    Route::get('/create_admin', [UserController::class, 'create_admin']);
 });
 
 Route::middleware(['auth'])->group(function() {
