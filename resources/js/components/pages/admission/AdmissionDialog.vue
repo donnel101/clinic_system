@@ -86,7 +86,19 @@
                                 </v-col>
                                 <v-col cols="12">
                                     <v-text-field
-                                        label="Husband Name"
+                                        label="Guardian Relationship"
+                                        v-model="data.relationship"
+                                        class="required uppercase"
+                                        dense
+                                        :rules="rules.required"
+                                        persistent-placeholder
+                                        outlined
+                                        name="relationship"
+                                    ></v-text-field>
+                                </v-col>
+                                <v-col cols="12">
+                                    <v-text-field
+                                        label="Guardian Name"
                                         v-model="data.husband_name"
                                         class="required uppercase"
                                         dense

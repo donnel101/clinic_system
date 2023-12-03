@@ -11,7 +11,8 @@
                     <th>Doctor</th>
                     <th>Room</th>
                     <th>Bed</th>
-                    <th>Husband</th>
+                    <th>Relationship</th>
+                    <th>Guardian</th>
                 </tr>
             </thead>
             <tbody>
@@ -26,6 +27,7 @@
                     <td>{{data.doctor_name}}</td>
                     <td>{{data.room_name}}</td>
                     <td>{{data.bed_name}}</td>
+                    <td>{{data.relationship}}</td>
                     <td>{{data.husband_name}}</td>
                 </tr>
             </tbody>

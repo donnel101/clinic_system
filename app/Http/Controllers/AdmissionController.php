@@ -21,6 +21,7 @@ class AdmissionController extends Controller
                 $case->doctor_id = $request->doctor_id;
                 $case->room_id = $request->room_id;
                 $case->bed_name = $request->bed_name;
+                $case->relationship = strtoupper($request->relationship);
                 $case->husband_name = strtoupper($request->husband_name);
                 $case->save();
                 // return 'success';
@@ -50,6 +51,7 @@ class AdmissionController extends Controller
                 'admissions.doctor_id',
                 'admissions.room_id',
                 'admissions.bed_name',
+                'admissions.relationship',
                 'admissions.husband_name',
                 'patients.name as patient_name',
                 'doctors.name as doctor_name',
@@ -84,6 +86,7 @@ class AdmissionController extends Controller
             $case->doctor_id = $request->doctor_id;
             $case->room_id = $request->room_id;
             $case->bed_name = $request->bed_name;
+            $case->relationship = strtoupper($request->relationship);
             $case->husband_name = strtoupper($request->husband_name);
             $case->save();
             DB::commit();

@@ -16,6 +16,7 @@ class PatientController extends Controller
             $address->province_id = $request->province_id;
             $address->municipality_id = $request->municipality_id;
             $address->barangay_id = $request->barangay_id;
+            $address->region = strtoupper($request->region);
             $address->house_address = strtoupper($request->house_address);
             $address->address_txt = strtoupper($request->address_txt);
             $address->save();
@@ -55,6 +56,7 @@ class PatientController extends Controller
                 'address.province_id',
                 'address.municipality_id',
                 'address.barangay_id',
+                'address.region',
                 'address.house_address',
                 'address.address_txt',
 
@@ -81,6 +83,7 @@ class PatientController extends Controller
             $address->province_id = $request->province_id;
             $address->municipality_id = $request->municipality_id;
             $address->barangay_id = $request->barangay_id;
+            $address->region = strtoupper($request->region);
             $address->house_address = strtoupper($request->house_address);
             $address->address_txt = strtoupper($request->address_txt);
             $address->save();

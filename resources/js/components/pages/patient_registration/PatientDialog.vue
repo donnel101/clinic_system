@@ -37,7 +37,7 @@
                                                 :rules="rules.required"
                                                 persistent-placeholder
                                                 outlined
-                                                name="password"
+                                                name="religion"
                                             ></v-autocomplete>
                                         </v-col>
                                         <v-col cols="4">
@@ -97,6 +97,7 @@
                                                 v-model="patient.contact_no"
                                                 class="required"
                                                 dense
+                                                @keypress="filterNumericInput"
                                                 :rules="rules.contactNo"
                                                 persistent-placeholder
                                                 outlined
@@ -195,7 +196,7 @@
                                                 name="password"
                                             ></v-autocomplete>
                                         </v-col>
-                                        <v-col cols="12">
+                                        <v-col cols="6">
                                             <v-autocomplete
                                                 label="Barangay"
                                                 v-model="patient.barangay_id"
@@ -207,6 +208,17 @@
                                                 outlined
                                                 name="password"
                                             ></v-autocomplete>
+                                        </v-col>
+                                        <v-col cols="6">
+                                            <v-text-field
+                                                label="Region"
+                                                v-model="patient.region"
+                                                dense
+                                                class="uppercase"
+                                                persistent-placeholder
+                                                outlined
+                                                name="password"
+                                            ></v-text-field>
                                         </v-col>
                                         <v-col cols="12">
                                             <v-text-field
@@ -234,6 +246,7 @@
                                                 persistent-placeholder
                                                 outlined
                                                 readonly
+                                                disabled
                                                 name="name"
                                             ></v-text-field>
                                         </v-col>
@@ -300,6 +313,20 @@ export default {
                 
             
         },
+        filterNumericInput(event) {
+            // Remove non-numeric characters
+            // if(val != null){
+            //     val = val.replace(/[^0-9]/g, '');
+            // }
+
+            const charCode = event.charCode;
+            
+            // Allow only numeric characters
+            if (charCode < 48 || charCode > 57) {
+                event.preventDefault();
+            }
+            
+        },
     },
     computed:{
         ...mapState([
@@ -336,6 +363,7 @@ export default {
             let province = ''
             let municipality = ''
             let barangay = ''
+            let region = ''
             let completeAddress = [this.patient.house_address]
             this.provinceMaster.filter(data=>{
                 if(data.id === this.patient.province_id){
@@ -357,6 +385,9 @@ export default {
             })
             if(!this.patient.house_address){
                 completeAddress.shift()
+            }
+            if(this.patient.region){
+                completeAddress.push(this.patient.region)
             }
             console.log('totok',completeAddress)
             this.patient.address_txt = completeAddress.join(' ')
