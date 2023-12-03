@@ -25,6 +25,7 @@ Route::post('/get_user',[UserController::class, 'get_user']);
 Route::post('/verify_account',[UserController::class, 'verifyAccount']);
 Route::post('/send_pin_number',[UserController::class, 'send_pin_number']);
 Route::post('/change_password',[UserController::class, 'change_password']);
+Route::post('/change_password_account',[UserController::class, 'change_password_account']);
 //SENDING EMAIL
 Route::post('/mail/store', function(Request $request){
     // Data Saving;\

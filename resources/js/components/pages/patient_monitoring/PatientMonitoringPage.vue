@@ -210,7 +210,6 @@ export default {
             });
         },
         caseDialog(data){
-            console.log(data)
             this.case_monitor = true
             this.case_monitor_data = data
         }

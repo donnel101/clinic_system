@@ -38,6 +38,9 @@
                 <snackbar
                     :snackbar="snackbar"
                 />
+                <changePassword
+                :id="changePassword"
+                />
             </v-container>
         </v-main>
     </v-app>
@@ -48,12 +51,14 @@ import { mapActions, mapState } from "vuex";
 import myImage from "../../../../../public/images/Forgotpassword-amico.png";
 import verificationPinDialog from "./verificationPinDialog.vue"
 import snackbar from "../../includes/SnackBar.vue"
+import changePassword from "./changePassword.vue";
 import axios from "axios";
 export default {
     name: "LoginPage",
     components:{
         "verificationPinDialog":verificationPinDialog,
-        "snackbar":snackbar
+        "snackbar":snackbar,
+        "changePassword":changePassword
     },
     data() {
         return {
@@ -70,6 +75,7 @@ export default {
         loading: false,
         employee: {},
         tab: null,
+        getID:null,
         };
     },
     computed: {
@@ -97,6 +103,7 @@ export default {
         }).then(async (res) => {
             // CONDITION FOR SENDING PIN
             if (res.data) {
+                this.getID = res.data.id;
             await axios({
                 method: "POST",
                 url: "api/send_pin_number",

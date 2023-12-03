@@ -85,7 +85,18 @@ class UserController extends Controller
     {
         //
     }
-
+    public function change_password_account(Request $req){
+        
+        return $req;    
+        try {
+            $user = User::find($req->password);
+            $user->password = Hash::make($req->password);
+            $user->save();
+            // return $pin_number;
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
     public function change_password(Request $req){
         // return $req;
         $min = 100000;
