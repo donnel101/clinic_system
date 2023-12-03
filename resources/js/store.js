@@ -106,6 +106,7 @@ export default new Vuex.Store({
         patientData:[],
         roomData:[],
         caseData:[],
+        case_VitalSign:[],
     },
 
     actions:{
@@ -212,6 +213,18 @@ export default new Vuex.Store({
                 console.log(err)
             });
         },
+        getVitalSign({commit}){
+            axios({
+                method : 'get',
+                url : 'vital_sign'
+            })
+            .then(res =>{
+                commit('getVitalSign',res.data);
+                console.log(res.data)
+            }).catch(err =>{
+                console.log(err)
+            });
+        },
     },
 
     mutations:{
@@ -250,6 +263,9 @@ export default new Vuex.Store({
         },
         getCase(state,payload){
             state.caseData = payload
+        },
+        getVitalSign(state,payload){
+            state.case_VitalSign = payload
         },
     },
     getters:{},

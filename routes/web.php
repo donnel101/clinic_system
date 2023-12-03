@@ -16,6 +16,8 @@ use App\Http\Controllers\PatientController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\AdmissionController;
 use App\Http\Controllers\EmailController;
+use App\Http\Controllers\VitalSignController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -90,6 +92,12 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/get_patient', [PatientController::class, 'get_patient']);
     Route::post('/patient_update', [PatientController::class, 'patient_update']);
     Route::post('/patient_delete', [PatientController::class, 'patient_delete']);
+    
+
+    // Patient monitor route
+    Route::post('/vital_sign_insert', [VitalSignController::class, 'vital_sign_insert']);
+    Route::get('/vital_sign', [VitalSignController::class, 'vital_sign']);
+    Route::post('/vital_sign_update', [VitalSignController::class, 'vital_sign_update']);
     
     Route::get('/{any?}', [SpaController::class, 'index'])->where('any', '.*');
 

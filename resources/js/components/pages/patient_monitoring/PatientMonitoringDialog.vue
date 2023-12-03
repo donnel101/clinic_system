@@ -10,19 +10,30 @@
                     </v-card-title>
                     <v-card-text>
                         <v-container>
-                            <v-tabs color="primary">
-        <v-tab>Partograph</v-tab>
-        <v-tab>Vital Sign</v-tab>
-        <v-tab>Medication Sheet</v-tab>
-        <v-tab>Medical Abstruct</v-tab>
+                            <v-tabs color="primary" v-model="tab">
+        <v-tab>Partograph 123</v-tab>
+        <v-tab href="#vitalSign">Vital Sign</v-tab>
+        <v-tab href="#medicationSheet">Medication Sheet</v-tab>
+        <v-tab href="#medicalAbstruct">Medical Abstruct</v-tab>
       </v-tabs>
-      <v-tabs-items>
+      <v-tabs-items  v-model="tab">
         <v-tab-item >
          <!-- ComponentHere  -->
         </v-tab-item>
-        <v-tab-item>
-                   <!-- ComponentHere  -->
-
+        <v-tab-item value="vitalSign">  
+            <PatientVitalSignForm 
+            :case_data="case_monitor_data"
+            />          
+        </v-tab-item>
+        <v-tab-item value="medicationSheet">  
+            <PatientMedicationSheet 
+            :case_data="case_monitor_data"
+            />  
+        </v-tab-item>
+        <v-tab-item value="medicalAbstruct">  
+            <PatientMedicalAbstruct 
+            :case_data="case_monitor_data"
+            /> 
         </v-tab-item>
       </v-tabs-items>
                         </v-container>
@@ -35,7 +46,15 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
+import PatientVitalSignForm from "./PatientVitalSignForm.vue"
+import PatientMedicationSheet from './PatientMedicationSheet.vue'
+import PatientMedicalAbstruct from './PatienMedicalAbstruct.vue'
 export default {
+    components:{
+        PatientVitalSignForm:PatientVitalSignForm,
+        PatientMedicationSheet:PatientMedicationSheet,
+        PatientMedicalAbstruct:PatientMedicalAbstruct
+    },
     props:{
         case_monitor_data:{
             type: Object
@@ -50,6 +69,7 @@ export default {
     data: () => ({
         snackbarTimeout:3000,
         dialogBtn:false,
+        tab:null,
     }),
     methods: {
          closeDialog(){
@@ -57,7 +77,16 @@ export default {
         },
     },
     computed:{},
-
+    created(){
+        console.log(this.case_monitor_data,"70")
+    },
+    // watch:{
+    //     dialog(val){
+    //         if(!val){
+    //             this.$refs.Insert.resetValidation()
+    //         }
+    //     },
+    // }
 }
 </script>
 

@@ -73,6 +73,11 @@ import verificationPinDialog from "./verificationPinDialog.vue"
 import snackbar from "../../includes/SnackBar.vue"
 import axios from "axios";
 export default {
+  props:{
+    id:{
+      type:String
+    }
+  },
   name: "LoginPage",
   components:{
     "verificationPinDialog":verificationPinDialog,
@@ -112,11 +117,12 @@ export default {
     },
 
     async updatePassword() {
+      console.log(this.login)
         if(this.changedPassword == this.checkedPassword){
             axios({
                 method:"POST",
-                url:"api/change_password",
-                data:{password:this.changedPassword}
+                url:"api/change_password_account",
+                data:{id:this.id,password:this.changedPassword}
             })
            this.snackbar.show=true
                 this.snackbar.text= "Change Success"

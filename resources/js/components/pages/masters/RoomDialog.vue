@@ -185,13 +185,13 @@ export default {
             // return this.tempHouse + ' ' + barangay + ' ' + municipality + ' ' + province
         },
     },
-    watch:{
-        dialog(val){
-            if(!val){
-                this.$refs.Insert.resetValidation()
-            }
-        },
-    }
+    // watch:{
+    //     dialog(val){
+    //         if(!val){
+    //             this.$refs.Insert.resetValidation()
+    //         }
+    //     },
+    // }
 
 }
 </script>
