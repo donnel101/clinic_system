@@ -7,8 +7,9 @@
                     <th v-show="editMode" class="text-left" style="width:20px">Edit</th> 
                     <th v-show="editMode" class="text-left" style="width:20px">ID</th> 
                     <th>Name</th>
+                    <th>Position</th>
                 </tr>
-            </thead>
+            </thead>    
             <tbody>
                 <tr v-for="(doctor,index) in doctorData" :key="index">
                     <td v-show="editMode">
@@ -17,6 +18,7 @@
                     </td>
                     <td v-show="editMode">{{doctor.id}}</td>
                     <td>{{doctor.name}}</td>
+                    <td>{{doctor.position}}</td>
                 </tr>
             </tbody>
         </v-simple-table>
@@ -42,6 +44,18 @@
                                         outlined
                                         name="name"
                                     ></v-text-field>
+                                </v-col>
+                                <v-col cols="12">
+                                    <v-autocomplete
+                                        label="Position"
+                                        v-model="position"
+                                        dense
+                                        :items="['Midwife','Doctor']"
+                                        :rules="rules.required"
+                                        persistent-placeholder
+                                        outlined
+                                        name="position"
+                                    ></v-autocomplete>
                                 </v-col>
                             </v-row>
                         </v-container>
@@ -77,6 +91,21 @@
                                         outlined
                                         name="name"
                                     ></v-text-field>
+                                </v-col>
+                                <v-col cols="12">
+                                    <v-autocomplete
+                                        label="Position"
+                                        v-model="position"
+                                        class="required uppercase"
+                                        dense
+                                        :items="['Midwife','Doctor']"
+                                        item-text="name"
+                                        item-value="id"
+                                        :rules="rules.required"
+                                        persistent-placeholder
+                                        outlined
+                                        name="position"
+                                    ></v-autocomplete>
                                 </v-col>
                             </v-row>
                             <input type="hidden" :value="tempId" name="id">
@@ -148,6 +177,7 @@ export default {
             selectedRows:[],
             tempName:null,
             tempId:null,
+            position:null,
             dialogBtn:false,
 
 
@@ -175,6 +205,7 @@ export default {
             console.log(data)
             this.tempName = data.name
             this.tempId = data.id
+            this.position= data.position
             this.editDialog = true
         },
         Insert(){
@@ -258,6 +289,7 @@ export default {
             if(!val){
                 this.tempName = null
                 this.tempId = null
+                this.position = null
                 this.$refs.Insert.resetValidation()
             }
         },
@@ -265,6 +297,7 @@ export default {
             if(!val){
                 this.tempName = null
                 this.tempId = null
+                this.position = null
                 this.$refs.Update.resetValidation()
             }
         }

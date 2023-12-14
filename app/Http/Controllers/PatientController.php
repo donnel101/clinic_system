@@ -34,6 +34,11 @@ class PatientController extends Controller
             $patient->contact_no = $request->contact_no;
             $patient->birthday = $request->birthday;
             $patient->birth_place = strtoupper($request->birth_place);
+            $patient->type_of_patient = $request->type_of_patient;
+            $patient->lmp = $request->lmp;
+            $patient->edc = $request->edc;
+            $patient->aog = $request->aog;
+
             $patient->save();
             DB::commit();
             return 'success';
@@ -101,6 +106,10 @@ class PatientController extends Controller
             $patient->contact_no = $request->contact_no;
             $patient->birthday = $request->birthday;
             $patient->birth_place = strtoupper($request->birth_place);
+            $patient->type_of_patient = $request->type_of_patient;
+            $patient->lmp = $request->lmp;
+            $patient->edc = $request->edc;
+            $patient->aog = $request->aog;
             $patient->save();
             DB::commit();
             return 'success';

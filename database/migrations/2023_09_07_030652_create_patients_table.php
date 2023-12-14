@@ -26,6 +26,10 @@ class CreatePatientsTable extends Migration
             $table->string('contact_no');
             $table->date('birthday');
             $table->string('birth_place');
+            $table->string('type_of_patient');
+            $table->string('lmp');
+            $table->string('edc');
+            $table->string('aog');
             $table->timestamps();
             $table->softDeletes();
         });
