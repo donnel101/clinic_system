@@ -13,33 +13,30 @@
                  
               </tr>
           </thead>
-  <!-- <tbody>
-    <tr v-for="(vital_sign,index) in case_VitalSign" :key="index">
+  <tbody>
+    <tr v-for="(medical_sheet,index) in case_MedicalSheet" :key="index">
       <td v-show="editMode">
-                          <v-icon color="success" @click="Edit(vital_sign)">mdi-pencil</v-icon>
+                          <v-icon color="success" @click="Edit(medical_sheet)">mdi-pencil</v-icon>
                           </td>
-                          <td v-show="editMode">{{vital_sign.id}}</td>
+                          <td v-show="editMode">{{medical_sheet.id}}</td>
       
-      <td>{{ vital_sign.time }}</td>
-      <td>{{ vital_sign.blood_presure }}</td>
-      <td>{{ vital_sign.temperature }}</td>
-      <td>{{ vital_sign.pulse_rate }}</td>
-      <td>{{ vital_sign.respiratory_rate }}</td>
-      <td>{{ vital_sign.fetal_heart_tone }}</td>
-      <td>{{ vital_sign.internal_examination }}</td>
+      <td>{{ medical_sheet.date }}</td>
+      <td>{{ medical_sheet.medication_dosage }}</td>
+      <td>{{ medical_sheet.hours }}</td>
+      <td>{{ medical_sheet.stat_medication }}</td>
   
     </tr>
-  </tbody> -->
+  </tbody>
          </v-simple-table>
          <insert-dialog 
-              :vitalSign="vitalSign"
+              :medication_sheet="medication_sheet"
               :dialog="insertDialog"  
               @closeDialog="insertDialog = false"
               :dialogSetting="insertDialogSetting" 
               @toggleSave="Insert()"
           ></insert-dialog>
           <edit-dialog 
-              :vitalSign="tempEditVitalsign" 
+              :medication_sheet="tempEditMedicalsheet" 
               :dialog="editDialog" 
               :dialogSetting="editDialogSetting" 
               @closeDialog="editDialog = false" 
@@ -60,7 +57,7 @@
   
   <script>
   import FloatAction from '../../includes/FloatAction.vue'
-  import VitalSignDialog from "./PatienVitalSignAdd.vue"
+  import PatientMedicationSheetAdd from './PatientMedicationSheetAdd.vue'
   import SnackBar from '../../includes/SnackBar.vue'
   import moment from 'moment'
   import { mapActions, mapState } from 'vuex'
@@ -75,8 +72,8 @@
           // 'toolbar':ToolbarComponent,
           'float-action':FloatAction,
           // 'agree-dialog':AgreeDialog,
-          'insert-dialog':VitalSignDialog,
-          'edit-dialog':VitalSignDialog,
+          'insert-dialog':PatientMedicationSheetAdd,
+          'edit-dialog':PatientMedicationSheetAdd,
           'snackbar':SnackBar,
       },
     data(){
@@ -87,11 +84,11 @@
                   delete:true,
               },
           insertDialogSetting:{
-              title:'Insert Vital Sign',
+              title:'Insert Medical Sheet',
               submitBtn:'Save'
           },
           editDialogSetting:{
-              title:'Update Vital Sign',
+              title:'Update Medical Sheet',
               submitBtn:'Update'
           },
           snackbar:{
@@ -99,26 +96,23 @@
                   color:'success',
                   text:null,
               },
-          vitalSign:{
-                  time:moment().format("HH:mm:ss"),
+              medication_sheet:{
+                  date:moment().format("YYYY-MM-DD"),
                   case_no:parseInt(this.case_data.case_no),
-                  blood_presure:"",
-                  temperature:"",
-                  pulse_rate:"",
-                  respiratory_rate:"",
-                  fetal_heart_tone:"",
-                  internal_examination:""
+                  medication_dosage:"",
+                  hours:"",
+                  stat_medication:"",
               },
         insertDialog:false,
         editDialog:false,
         editMode:false,
         tableHeight:window.innerHeight - 180,
-        tempEditVitalsign:{}
+        tempEditMedicalsheet:{}
      }
      
     },
     methods:{
-      ...mapActions(['getVitalSign']),
+      ...mapActions(['getMedicalSheet']),
   
       toggleInsertDialog(){
               this.insertDialog = true
@@ -138,15 +132,15 @@
               this.editMode = !this.editMode
           },
           Edit(data){
-              console.log(data)
-              this.tempEditVitalsign = structuredClone(data)
+            //   console.log(data)
+              this.tempEditMedicalsheet = structuredClone(data)
               this.editDialog = true
           }, 
           Insert(){
             axios({
                   method : 'post',
-                  url : 'vital_sign_insert',
-                  data : this.vitalSign,
+                  url : 'medication_sheet_insert',
+                  data : this.medication_sheet,
               })
               .then(res =>{
                   console.log(res.data)
@@ -154,7 +148,7 @@
                   this.snackbar.text= "Success Insert"
                   this.snackbar.color="success"
                   // this.$refs.Insert.resetValidation()
-                  this.getVitalSign()
+                  this.getMedicalSheet()
                   this.insertDialog = false
   
               }).catch(err =>{
@@ -166,8 +160,8 @@
               this.loadMore = true
               axios({
                   method : 'post',
-                  url : 'vital_sign_update',
-                  data : this.tempEditVitalsign,
+                  url : 'medication_sheet_update',
+                  data : this.tempEditMedicalsheet,
               })
               .then(res =>{
                   console.log(res.data)
@@ -175,7 +169,7 @@
                   this.snackbar.text= "Success Update"
                   this.snackbar.color="success"
                   // this.$refs.Insert.resetValidation()
-                  this.getVitalSign()
+                  this.getMedicalSheet()
                   this.editDialog = false
   
               }).catch(err =>{
@@ -186,11 +180,11 @@
     },
     computed:{
       ...mapState([
-              'case_VitalSign',
+              'case_MedicalSheet',
           ]),
       },
       mounted(){
-          this.getVitalSign()
+          this.getMedicalSheet()
       },
   }
   </script>

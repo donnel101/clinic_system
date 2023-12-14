@@ -140,7 +140,6 @@ export default {
             this.editMode = !this.editMode
         },
         Edit(data){
-            console.log(data)
             this.tempEditVitalsign = structuredClone(data)
             this.editDialog = true
         }, 
