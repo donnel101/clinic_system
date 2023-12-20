@@ -252,6 +252,56 @@
                                         </v-col>
                                     </v-row>
                                 </v-col>
+                                <v-col>
+                                    <v-row>
+                                        <v-col cols="3">
+                                            <v-autocomplete
+                                                label="Type of patient"
+                                                v-model="patient.type_of_patient"
+                                                :items="['Baby','Mother']"
+                                                item-text="name"
+                                                item-value="id"
+                                                dense
+                                                persistent-placeholder
+                                                outlined
+                                                name="password"
+                                            ></v-autocomplete>
+                                        </v-col>
+                                        <v-col cols="3">
+                                            <v-text-field
+                                            label="LMP"
+                                                v-model="patient.lmp"
+                                                class="required uppercase"
+                                                dense
+                                                persistent-placeholder
+                                                outlined
+                                                name="name"
+                                            ></v-text-field>
+                                        </v-col>
+                                        <v-col cols="3">
+                                            <v-text-field
+                                            label="EDC"
+                                                v-model="patient.edc"
+                                                class="required uppercase"
+                                                dense
+                                                persistent-placeholder
+                                                outlined
+                                                name="name"
+                                            ></v-text-field>
+                                        </v-col>
+                                        <v-col cols="3">
+                                            <v-text-field
+                                            label="AOG"
+                                                v-model="patient.aog"
+                                                class="required uppercase"
+                                                dense
+                                                persistent-placeholder
+                                                outlined
+                                                name="name"
+                                            ></v-text-field>
+                                        </v-col>
+                                    </v-row>
+                                </v-col>
                             </v-row>
                         </v-container>
                     </v-card-text>

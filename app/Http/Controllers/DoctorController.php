@@ -10,10 +10,10 @@ class DoctorController extends Controller
 {
     public function doctor_insert(Request $request){
         try {
-            // return $request;
             DB::beginTransaction();
             $doctor = new Doctor();
             $doctor->name = strtoupper($request->name);
+            $doctor->position = strtoupper($request->position);
             $doctor->save();
             DB::commit();
             return 'success';
@@ -33,6 +33,7 @@ class DoctorController extends Controller
             $doctors = Doctor::select(
                 'id',
                 'name',
+                'position'
             )
             ->get();
             return $doctors;
@@ -53,6 +54,7 @@ class DoctorController extends Controller
             DB::beginTransaction();
             $doctor = Doctor::find($request->id);
             $doctor->name = strtoupper($request->name);
+            $doctor->position = strtoupper($request->position);
             $doctor->save();
             DB::commit();
             return 'success';
