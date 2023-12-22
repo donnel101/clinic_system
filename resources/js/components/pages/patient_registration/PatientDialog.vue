@@ -109,20 +109,6 @@
                                 </v-col>
                                 <v-col cols="12" lg="6" md="12" sm="12">
                                     <v-row>
-                                        <v-col cols="3">
-                                            <v-text-field
-                                                label="Age"
-                                                v-model="patient.age"
-                                                class="required uppercase"
-                                                dense
-                                                :rules="rules.required"
-                                                persistent-placeholder
-                                                outlined
-                                                readonly
-                                                name="name"
-                                                @click="AgeCompute()"
-                                            ></v-text-field>
-                                        </v-col>
                                         <v-col cols="5">
                                             <v-menu
                                                 v-model="birthdayMenu"
@@ -150,9 +136,23 @@
                                                 <v-date-picker
                                                         v-model="patient.birthday"
                                                         no-title
-                                                        @input="birthdayMenu = false"
+                                                        @input="birthdayMenu = false;AgeCompute()"
                                                 ></v-date-picker>
                                             </v-menu>
+                                        </v-col>
+                                        <v-col cols="3">
+                                            <v-text-field
+                                                label="Age"
+                                                v-model="patient.age"
+                                                class="required uppercase"
+                                                dense
+                                                :rules="rules.required"
+                                                persistent-placeholder
+                                                outlined
+                                                readonly
+                                                name="name"
+                                                @click="AgeCompute()"
+                                            ></v-text-field>
                                         </v-col>
                                         <v-col cols="4">
                                             <v-autocomplete
@@ -258,7 +258,7 @@
                                             <v-autocomplete
                                                 label="Type of patient"
                                                 v-model="patient.type_of_patient"
-                                                :items="['Baby','Mother']"
+                                                :items="typeOfPatient"
                                                 item-text="name"
                                                 item-value="id"
                                                 dense
@@ -267,39 +267,65 @@
                                                 name="password"
                                             ></v-autocomplete>
                                         </v-col>
-                                        <v-col cols="3">
-                                            <v-text-field
-                                            label="LMP"
-                                                v-model="patient.lmp"
-                                                class="required uppercase"
-                                                dense
-                                                persistent-placeholder
-                                                outlined
-                                                name="name"
-                                            ></v-text-field>
-                                        </v-col>
-                                        <v-col cols="3">
-                                            <v-text-field
-                                            label="EDC"
-                                                v-model="patient.edc"
-                                                class="required uppercase"
-                                                dense
-                                                persistent-placeholder
-                                                outlined
-                                                name="name"
-                                            ></v-text-field>
-                                        </v-col>
-                                        <v-col cols="3">
-                                            <v-text-field
-                                            label="AOG"
-                                                v-model="patient.aog"
-                                                class="required uppercase"
-                                                dense
-                                                persistent-placeholder
-                                                outlined
-                                                name="name"
-                                            ></v-text-field>
-                                        </v-col>
+                                        <template v-if="patient.type_of_patient == 2">
+                                            <v-col cols="3">
+                                                <v-menu
+                                                    v-model="lmpMenu"
+                                                    :close-on-content-click="false"
+                                                    transition="scale-transition"
+                                                    offset-y
+                                                    max-width="290px"
+                                                    min-width="auto"
+                                                >
+                                                    <template v-slot:activator="{ on, attrs }">
+                                                        <v-text-field
+                                                            v-model="patient.lmp"
+                                                            label="LMP"
+                                                            class="required uppercase"
+                                                            persistent-placeholder
+                                                            prepend-inner-icon="mdi-calendar"
+                                                            readonly
+                                                            outlined
+                                                            :rules="rules.required"
+                                                            dense
+                                                            v-bind="attrs"
+                                                            v-on="on"
+                                                        ></v-text-field>
+                                                    </template>
+                                                    <v-date-picker
+                                                            v-model="patient.lmp"
+                                                            no-title
+                                                            :max="maxDate"
+                                                            @input="lmpMenu = false;EDCCompute();AOGCompute()"
+                                                    ></v-date-picker>
+                                                </v-menu>
+                                            </v-col>
+                                            <v-col cols="3">
+                                                <v-text-field
+                                                    label="EDC"
+                                                    v-model="patient.edc"
+                                                    class="required uppercase"
+                                                    dense
+                                                    readonly
+                                                    persistent-placeholder
+                                                    :rules="rules.required"
+                                                    outlined
+                                                    name="name"
+                                                    @click="EDCCompute()"
+                                                ></v-text-field>
+                                            </v-col>
+                                            <v-col cols="3">
+                                                <v-text-field
+                                                    label="AOG(weeks)"
+                                                    v-model="patient.aog"
+                                                    class="required uppercase"
+                                                    dense
+                                                    persistent-placeholder
+                                                    outlined
+                                                    name="name"
+                                                ></v-text-field>
+                                            </v-col>
+                                        </template>
                                     </v-row>
                                 </v-col>
                             </v-row>
@@ -317,6 +343,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 import { mapActions, mapState } from 'vuex'
 export default {
     props:{
@@ -334,6 +361,13 @@ export default {
         snackbarTimeout:3000,
         birthdayMenu:false,
         dialogBtn:false,
+        lmpMenu:false,
+        typeOfPatient:[
+            {id:1,name:'Baby'},
+            {id:2,name:'Mother'},
+        ],
+        maxDate:moment().format("YYYY-MM-DD"),
+
     }),
     methods: {
         refresh(){
@@ -360,8 +394,6 @@ export default {
                     console.log('no age');
                 }
             }
-                
-            
         },
         filterNumericInput(event) {
             // Remove non-numeric characters
@@ -377,6 +409,22 @@ export default {
             }
             
         },
+        EDCCompute(){
+            console.log(this.patient.lmp)
+            if(this.patient.lmp){
+                let lmp = moment(this.patient.lmp, "YYYY-MM-DD").add(9,'M').add(7,'d').format('YYYY-MM-DD')
+                console.log(lmp)
+                this.patient.edc = lmp
+            }
+        },
+        AOGCompute(){
+            if(this.patient.lmp){
+                let aog = moment.duration(moment().diff(moment(this.patient.lmp, "YYYY-MM-DD")))
+                // let aog = moment(this.patient.lmp, "YYYY-MM-DD").add(9,'M').add(7,'d').format('YYYY-MM-DD')
+                console.log(aog.asWeeks())
+                this.patient.aog = Math.floor(aog.asWeeks())
+            }
+        }
     },
     computed:{
         ...mapState([

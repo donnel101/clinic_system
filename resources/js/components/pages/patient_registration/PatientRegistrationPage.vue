@@ -48,7 +48,7 @@
         
         <insert-dialog :patient="tempPatient" :dialog="insertDialog" :dialogSetting="insertDialogSetting" @closeDialog="insertDialog = false" @toggleSave="Insert()"></insert-dialog>
         
-        <edit-dialog :patient="tempPatient" :dialog="editDialog" :dialogSetting="editDialogSetting" @closeDialog="editDialog = false" @toggleSave="Update()"></edit-dialog>
+        <edit-dialog :patient="tempEditPatient" :dialog="editDialog" :dialogSetting="editDialogSetting" @closeDialog="editDialog = false" @toggleSave="Update()"></edit-dialog>
 
         <agree-dialog :agree="agree" @closeAgree="closeAgree()" @toggleAgree="Delete()"></agree-dialog>
         <snackbar :snackbar="snackbar"></snackbar>
@@ -135,6 +135,7 @@ export default {
                 barangay_id:null,
                 house_address:null,
             },
+            tempEditPatient:{}
 
         }
     },
@@ -147,6 +148,7 @@ export default {
             this.Delete()
         },
         toggleInsertDialog(){
+            this.tempPatient.nationality = "FILIPINO"
             this.insertDialog=true
         },
         toggleDelete(id){
@@ -181,7 +183,7 @@ export default {
         },
         Edit(item){
             console.log(item)
-            this.tempPatient = item
+            this.tempEditPatient = item
             this.editDialog = true
         },
         Update(){
@@ -189,7 +191,7 @@ export default {
             axios({
                 method : 'post',
                 url : 'patient_update',
-                data : this.tempPatient,
+                data : this.tempEditPatient,
             })
             .then(res =>{
                 console.log(res.data)
