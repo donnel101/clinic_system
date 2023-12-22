@@ -183,7 +183,7 @@ export default {
         },
         Edit(item){
             console.log(item)
-            this.tempEditPatient = item
+            this.tempEditPatient = structuredClone(item)
             this.editDialog = true
         },
         Update(){
