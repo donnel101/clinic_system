@@ -9,7 +9,7 @@
                         <v-icon color="white" @click="closeDialog()">mdi-close</v-icon>
                     </v-card-title>
                     <v-card-text>
-                        <v-container>
+                        <v-container fluid>
                             <v-tabs color="primary" v-model="tab">
         <v-tab>Partograph 123</v-tab>
         <v-tab href="#vitalSign">Vital Sign</v-tab>

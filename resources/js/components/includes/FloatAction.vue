@@ -106,7 +106,7 @@
 </script>
 <style scoped>
 .button-bottom{
-    position: fixed;
+    position: absolute;
     bottom: 12px;
     right: 12px;
 }
