@@ -1,5 +1,7 @@
 <template>
     <v-container class="container-main pt-0" fluid>
+                {{registerData}}
+
         <toolbar :toolbar="toolbar"></toolbar>
         <v-simple-table dense :height="tableHeight">
             <thead>
@@ -9,6 +11,8 @@
                     <th>Name</th>
                     <th>Username</th>
                     <th>Email</th>
+                    <th>Status</th>
+                    <th>Access</th>
                 </tr>
             </thead>
             <tbody>
@@ -21,6 +25,15 @@
                     <td>{{item.name}}</td>
                     <td>{{item.username}}</td>
                     <td>{{item.email}}</td>
+                    <td>
+    <template v-if="editMode">
+        <v-select v-model="selectedStatus" :items="['Active', 'Inactive']" dense @change="updateStatus(item, selectedStatus)"></v-select>
+    </template>
+    <template v-else>
+        {{ item.status == '1' ? 'Active' : 'Inactive' }}
+    </template>
+</td>
+                    <td>{{item.access}}</td>
                 </tr>
             </tbody>
         </v-simple-table>
@@ -218,6 +231,7 @@ export default {
                 edit:true,
                 delete:true,
             },
+            selectedStatus:'',
             selectAll:false,
             selectedRows:[],
             editMode:false,
@@ -252,6 +266,7 @@ export default {
             tempPassword:null,
             tempIp:null,
             tempEmail:null,
+            tempStatus:null,
         }
     },
     methods:{
@@ -356,7 +371,26 @@ export default {
                 this.dialogBtn = false
                 console.log(err)
             });
-        }
+        },
+         updateStatus(newStatus) {
+        // Map 'Active' to '1' and 'Inactive' to '0'
+        const statusValue = newStatus === 'Active' ? '1' : '0';
+
+        // Make an API call or update the 'registerData' array directly
+        // this.updateStatusOnServer(item.id, statusValue);
+    },
+    // updateStatusOnServer(id, newStatus) {
+    //     // Make an API call to update the status in the database
+    //     axios.post('update_status', { id, status: newStatus })
+    //         .then(response => {
+    //             console.log(response.data);
+    //             // Update the 'registerData' array or reload the data from the server
+    //             this.getRegister();
+    //         })
+    //         .catch(error => {
+    //             console.error(error);
+    //         });
+    // },
     },
     computed:{
         ...mapState([

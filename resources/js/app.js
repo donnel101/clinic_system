@@ -1,21 +1,33 @@
 require('./bootstrap');
-require('./dialog_movable')
-import Vue from 'vue'
-import Vuetify from 'vuetify'
-import Router from './router'
-import store from './store'
+require('./dialog_movable');
+import Vue from 'vue';
+import Vuetify from 'vuetify';
+import Router from './router';
+import store from './store';
 import App from './template/App';
 import Login from './template/LoginApp';
-Vue.use(Vuetify)
+import VueHtmlToPaper from "vue-html-to-paper";
+
+Vue.use(Vuetify);
+
+const options = {
+    name: "_blank",
+    specs: ["fullscreen=yes", "titlebar=yes", "scrollbars=yes"],
+    styles: [
+        "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css",
+    ],
+};
 
 new Vue({
     el: '#app',
     store,
-    router:Router,
+    router: Router,
     vuetify: new Vuetify(),
-    components : {
+    components: {
         App,
         Login
-    }
-    // render: h=>h(App)
+    },
+    mounted() {
+        Vue.use(VueHtmlToPaper, options);
+    },
 });

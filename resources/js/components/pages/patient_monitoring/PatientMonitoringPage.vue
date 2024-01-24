@@ -113,7 +113,7 @@ export default {
         }
     },
     methods:{
-        ...mapActions(['getCase']),
+        ...mapActions(['getCase','set_case_no']),
         closeAgree(){
             this.agree.dialog = false
         },
@@ -212,6 +212,7 @@ export default {
         caseDialog(data){
             this.case_monitor = true
             this.case_monitor_data = data
+            this.set_case_no(data.case_no)
         }
     },
     computed:{
@@ -219,6 +220,7 @@ export default {
             'rules',
             'caseData',
             'selectRoomType',
+            
         ]),
     },
     watch:{

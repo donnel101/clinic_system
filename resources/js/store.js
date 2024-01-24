@@ -13,11 +13,13 @@ const persistedData = new createPersistedState({
     reducer : state => ({
         loggedInUser : state.loggedInUser,
         systemData : state.systemData,
+        case_no : state.case_no
     })
 })
 
 export default new Vuex.Store({
     state:{
+        case_no:null,
         loggedInUser : null,
         systemData:null,
         province:province,
@@ -108,9 +110,13 @@ export default new Vuex.Store({
         caseData:[],
         case_VitalSign:[],
         case_MedicalSheet:[],
+        case_NewBorn:[],
     },
 
     actions:{
+        set_case_no(context,val){
+            context.commit('set_case_no',val);
+        },
         login({commit}){
             axios({
                 method : "GET",
@@ -214,26 +220,13 @@ export default new Vuex.Store({
                 console.log(err)
             });
         },
-        getVitalSign({commit}){
+        getNewBorn({commit}){
             axios({
                 method : 'get',
-                url : 'vital_sign'
+                url : 'new_born'
             })
             .then(res =>{
-                commit('getVitalSign',res.data);
-                console.log(res.data)
-            }).catch(err =>{
-                console.log(err)
-            });
-        },
-        getMedicalSheet({commit}){
-            axios({
-                method : 'get',
-                url : 'medication_sheet'
-            })
-            .then(res =>{
-                commit('getMedicalSheet',res.data);
-                console.log(res.data)
+                commit('getNewBorn',res.data);
             }).catch(err =>{
                 console.log(err)
             });
@@ -241,6 +234,16 @@ export default new Vuex.Store({
     },
 
     mutations:{
+        set_case_no(state,val){
+            console.log(val,'254')
+            state.case_no = val
+            state.case_NewBorn = null
+            state.case_MedicalSheet = null
+            state.case_VitalSign = null
+            this.commit('getVitalSign')
+            this.commit('getMedicalSheet')
+
+        },
         login(state, payload){
             state.loggedInUser = payload
             // window.location.href='/';
@@ -277,11 +280,34 @@ export default new Vuex.Store({
         getCase(state,payload){
             state.caseData = payload
         },
-        getVitalSign(state,payload){
-            state.case_VitalSign = payload
+        getVitalSign(state){
+            axios({
+                method : 'post',
+                data : {case_no:state.case_no},
+                url : 'vital_sign'
+            })
+            .then(res =>{
+                state.case_VitalSign = res.data
+               
+            }).catch(err =>{
+                console.log(err)
+            });
         },
-        getMedicalSheet(state,payload){
-            state.case_MedicalSheet = payload
+        getMedicalSheet(state){
+            axios({
+                method : 'post',
+                data : {case_no:state.case_no},
+                url : 'medication_sheet'
+            })
+            .then(res =>{
+                state.case_MedicalSheet = res.data;
+                // console.log(res.data)
+            }).catch(err =>{
+                console.log(err)
+            });
+        },
+        getNewBorn(state,payload){
+            state.case_NewBorn = payload
         }
     },
     getters:{},

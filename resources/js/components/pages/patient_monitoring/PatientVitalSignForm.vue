@@ -120,7 +120,7 @@ export default {
    
   },
   methods:{
-    ...mapActions(['getVitalSign']),
+    ...mapActions([]),
 
     toggleInsertDialog(){
             this.insertDialog = true
@@ -155,7 +155,7 @@ export default {
                 this.snackbar.text= "Success Insert"
                 this.snackbar.color="success"
                 // this.$refs.Insert.resetValidation()
-                this.getVitalSign()
+                // this.getVitalSign()
                 this.insertDialog = false
 
             }).catch(err =>{
@@ -176,7 +176,7 @@ export default {
                 this.snackbar.text= "Success Update"
                 this.snackbar.color="success"
                 // this.$refs.Insert.resetValidation()
-                this.getVitalSign()
+                // this.getVitalSign()
                 this.editDialog = false
 
             }).catch(err =>{
@@ -188,10 +188,12 @@ export default {
   computed:{
     ...mapState([
             'case_VitalSign',
+            'case_no'
         ]),
+    
     },
     mounted(){
-        this.getVitalSign()
+        console.log(this.case_no)
     },
 }
 </script>

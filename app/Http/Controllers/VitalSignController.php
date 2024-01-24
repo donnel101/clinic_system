@@ -40,12 +40,12 @@ class VitalSignController extends Controller
     //Get patien vital sign
     public function vital_sign(Request $request){
         try {
-            // return $request;
-
+            // return $request->case_no;
+            $case_no = intval($request->case_no);
             $vital_sign = VitalSign::select(
                 'vital_signs.*'
             )
-      
+            ->where('case_no', '=', $case_no)    
             ->get();
             return $vital_sign;
         } catch (\Exception $e) {

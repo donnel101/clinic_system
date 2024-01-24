@@ -15,6 +15,7 @@
         <v-tab href="#vitalSign">Vital Sign</v-tab>
         <v-tab href="#medicationSheet">Medication Sheet</v-tab>
         <v-tab href="#medicalAbstruct">Medical Abstruct</v-tab>
+        <v-tab href="#newBornRecord">New Born Physician Record</v-tab>
       </v-tabs>
       <v-tabs-items  v-model="tab">
         <v-tab-item >
@@ -35,6 +36,11 @@
             :case_data="case_monitor_data"
             /> 
         </v-tab-item>
+        <v-tab-item value="newBornRecord">  
+            <PatientNewBornRecord 
+            :case_data="case_monitor_data"
+            /> 
+        </v-tab-item>
       </v-tabs-items>
                         </v-container>
                     </v-card-text>
@@ -49,11 +55,13 @@ import { mapActions, mapState } from 'vuex'
 import PatientVitalSignForm from "./PatientVitalSignForm.vue"
 import PatientMedicationSheet from './PatientMedicationSheet.vue'
 import PatientMedicalAbstruct from './PatienMedicalAbstruct.vue'
+import PatientNewBornRecord from './PatientNewBornRecord.vue'
 export default {
     components:{
         PatientVitalSignForm:PatientVitalSignForm,
         PatientMedicationSheet:PatientMedicationSheet,
-        PatientMedicalAbstruct:PatientMedicalAbstruct
+        PatientMedicalAbstruct:PatientMedicalAbstruct,
+        PatientNewBornRecord:PatientNewBornRecord
     },
     props:{
         case_monitor_data:{
@@ -74,6 +82,8 @@ export default {
     methods: {
          closeDialog(){
             this.$emit('closeDialog')
+            // console.log("ttiggeeerrr dito")
+            // this.case_monitor_data = null
         },
     },
     computed:{},

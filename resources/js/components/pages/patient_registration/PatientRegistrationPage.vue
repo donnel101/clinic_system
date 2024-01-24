@@ -8,6 +8,7 @@
                     <th v-show="editMode" class="text-left" style="width:20px">ID</th> 
                     <th>Name</th>
                     <th>Sex</th>
+                    <th>Weight</th>
                     <th>Age</th>
                     <th>BirthDay</th>
                     <th>BirthPlace</th>
@@ -28,6 +29,7 @@
                     <td v-show="editMode">{{item.id}}</td>
                     <td>{{item.name}}</td>
                     <td>{{selectSex[item.sex_id - 1].name}}</td>
+                    <td>{{item.weight}}</td>
                     <td>{{item.age}}</td>
                     <td>{{item.birthday}}</td>
                     <td>{{item.birth_place}}</td>

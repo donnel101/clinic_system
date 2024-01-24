@@ -44,26 +44,41 @@ class AdmissionController extends Controller
     public function get_case(Request $request){
         try {
             DB::beginTransaction();
-            $cases = Admission::select(
-                'admissions.id',
-                'admissions.case_no',
-                'admissions.patient_id',
-                'admissions.doctor_id',
-                'admissions.room_id',
-                'admissions.bed_name',
-                'admissions.relationship',
-                'admissions.husband_name',
-                'patients.name as patient_name',
-                'doctors.name as doctor_name',
-                'rooms.name as room_name',
-                'rooms.room_type',
-                'admissions.created_at AS admission_date',
-            )
-            ->leftJoin('patients','patients.id','admissions.patient_id')
-            ->leftJoin('doctors','doctors.id','admissions.doctor_id')
-            ->leftJoin('rooms','rooms.id','admissions.room_id')
-            ->orderBy('id','DESC')
-            ->get();
+            $cases = DB::table('admissions')
+    ->select(
+        'admissions.id',
+        'admissions.case_no',
+        'admissions.patient_id',
+        'admissions.doctor_id',
+        'admissions.room_id',
+        'admissions.bed_name',
+        'admissions.relationship',
+        'admissions.husband_name',
+        'patients.name as patient_name',
+        'patients.lmp',
+        'patients.edc',
+        'patients.aog',
+        'patients.weight',
+        'latest_vital_signs.blood_presure',
+        'latest_vital_signs.temperature',
+        'latest_vital_signs.pulse_rate',
+        'latest_vital_signs.respiratory_rate',
+        'latest_vital_signs.fetal_heart_tone',
+        'latest_vital_signs.internal_examination',
+        'doctors.name as doctor_name',
+        'rooms.name as room_name',
+        'rooms.room_type',
+        'admissions.created_at AS admission_date'
+    )
+    ->leftJoin('patients', 'patients.id', '=', 'admissions.patient_id')
+    ->leftJoin('doctors', 'doctors.id', '=', 'admissions.doctor_id')
+    ->leftJoin('rooms', 'rooms.id', '=', 'admissions.room_id')
+    ->leftJoin(DB::raw('(SELECT case_no, blood_presure, temperature, pulse_rate, respiratory_rate, fetal_heart_tone, internal_examination
+                        FROM vital_signs
+                        ORDER BY id DESC
+                        LIMIT 1) AS latest_vital_signs'), 'latest_vital_signs.case_no', '=', 'admissions.case_no')
+    ->orderBy('admissions.id', 'DESC')
+    ->get();
             return $cases;
             DB::commit();
             return 'success';

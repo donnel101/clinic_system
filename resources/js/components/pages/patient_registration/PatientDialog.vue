@@ -25,6 +25,8 @@
                                                 name="name"
                                             ></v-text-field>
                                         </v-col>
+                                     
+                                        
                                         <v-col cols="4">
                                             <v-autocomplete
                                                 label="Religion"
@@ -154,7 +156,19 @@
                                                 @click="AgeCompute()"
                                             ></v-text-field>
                                         </v-col>
-                                        <v-col cols="4">
+                                            <v-col cols="4">
+                                            <v-text-field
+                                                label="Weight(Kg)"
+                                                v-model="patient.weight"
+                                                class="required"
+                                                dense
+                                                :rules="rules.required"
+                                                persistent-placeholder
+                                                outlined
+                                                name="password"
+                                            ></v-text-field>
+                                        </v-col>
+                                        <v-col cols="6">
                                             <v-autocomplete
                                                 label="Civil Status"
                                                 v-model="patient.civil_status_id"
@@ -220,7 +234,7 @@
                                                 name="password"
                                             ></v-text-field>
                                         </v-col>
-                                        <v-col cols="12">
+                                        <v-col cols="6">
                                             <v-text-field
                                                 label="House Address"
                                                 v-model="patient.house_address"

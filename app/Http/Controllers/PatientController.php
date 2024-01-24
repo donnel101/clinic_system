@@ -33,6 +33,7 @@ class PatientController extends Controller
             $patient->address_id = $last_id;
             $patient->contact_no = $request->contact_no;
             $patient->birthday = $request->birthday;
+            $patient->weight = $request->weight;
             $patient->birth_place = strtoupper($request->birth_place);
             $patient->type_of_patient = $request->type_of_patient;
             $patient->lmp = $request->lmp;
@@ -105,6 +106,7 @@ class PatientController extends Controller
             $patient->address_id = $last_id;
             $patient->contact_no = $request->contact_no;
             $patient->birthday = $request->birthday;
+            $patient->weight = $request->weight;
             $patient->birth_place = strtoupper($request->birth_place);
             $patient->type_of_patient = $request->type_of_patient;
             $patient->lmp = $request->lmp;

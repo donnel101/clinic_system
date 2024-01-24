@@ -112,7 +112,7 @@
      
     },
     methods:{
-      ...mapActions(['getMedicalSheet']),
+      ...mapActions(['']),
   
       toggleInsertDialog(){
               this.insertDialog = true
@@ -148,7 +148,7 @@
                   this.snackbar.text= "Success Insert"
                   this.snackbar.color="success"
                   // this.$refs.Insert.resetValidation()
-                  this.getMedicalSheet()
+                  // this.getMedicalSheet()
                   this.insertDialog = false
   
               }).catch(err =>{
@@ -169,7 +169,7 @@
                   this.snackbar.text= "Success Update"
                   this.snackbar.color="success"
                   // this.$refs.Insert.resetValidation()
-                  this.getMedicalSheet()
+                  // this.getMedicalSheet()
                   this.editDialog = false
   
               }).catch(err =>{
@@ -181,10 +181,13 @@
     computed:{
       ...mapState([
               'case_MedicalSheet',
+              'case_no'
           ]),
       },
       mounted(){
-          this.getMedicalSheet()
+          // this.getMedicalSheet()
+        console.log(this.case_no)
+
       },
   }
   </script>

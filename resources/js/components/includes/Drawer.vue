@@ -55,9 +55,9 @@ import { mapState , mapActions } from "vuex";
             //     // {text:'Separated Document', icon:'mdi-hand-wave', to:'separated_document'},
             // ],
             items:[
-                {text:'Home', icon:'mdi-home', to:'home'},
-                {text:'Hello', icon:'mdi-hand-wave', to:'hello'},
-                {text: 'Test', icon: 'mdi-account', to : 'test'},
+                {text:'Dashboard', icon:'mdi-monitor-dashboard', to:'home'},
+                // {text:'Hello', icon:'mdi-hand-wave', to:'hello'},
+                // {text: 'Test', icon: 'mdi-account', to : 'test'},
                 {text: 'Patient Registration', icon: 'mdi-account', to : 'patient_registration'},
                 {text: 'Religion', icon: 'mdi-church', to : 'religion'},
                 {text: 'Doctor', icon: 'mdi-doctor', to : 'doctor'},

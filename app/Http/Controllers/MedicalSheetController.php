@@ -34,12 +34,12 @@ class MedicalSheetController extends Controller
     //MEDICAL SHEET GET
     public function medication_sheet(Request $request){
         try {
-            // return $request;
-
+            
+            $case_no = intval($request->case_no);
             $medication_sheet = MedicationSheet::select(
                 'medication_sheets.*'
             )
-      
+            ->where('case_no', '=', $case_no) 
             ->get();
             return $medication_sheet;
         } catch (\Exception $e) {

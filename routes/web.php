@@ -18,6 +18,7 @@ use App\Http\Controllers\AdmissionController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\VitalSignController;
 use App\Http\Controllers\MedicalSheetController;
+use App\Http\Controllers\NewBornController;
 
 
 /*
@@ -99,13 +100,18 @@ Route::middleware(['auth'])->group(function() {
 
     //VITAL SIGN
     Route::post('/vital_sign_insert', [VitalSignController::class, 'vital_sign_insert']);
-    Route::get('/vital_sign', [VitalSignController::class, 'vital_sign']);
+    Route::post('/vital_sign', [VitalSignController::class, 'vital_sign']);
     Route::post('/vital_sign_update', [VitalSignController::class, 'vital_sign_update']);
 
     //MEDICATION SHEET
     Route::post('/medication_sheet_insert', [MedicalSheetController::class, 'medication_sheet_insert']);
-    Route::get('/medication_sheet', [MedicalSheetController::class, 'medication_sheet']);
+    Route::post('/medication_sheet', [MedicalSheetController::class, 'medication_sheet']);
     Route::post('/medication_sheet_update', [MedicalSheetController::class, 'medication_sheet_update']);
+    
+    //NEW BORN
+    Route::post('/new_born_insert', [NewBornController::class, 'new_born_insert']);
+    Route::get('/new_born', [NewBornController::class, 'new_born']);
+    Route::post('/new_born_update', [NewBornController::class, 'new_born_update']);
 
 
     
